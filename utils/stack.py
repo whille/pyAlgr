@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# using array as inner container
 
 
 class Stack(object):
@@ -13,6 +14,7 @@ class Stack(object):
         return self.lst.pop()
 
 
+# P140
 class ResizingArrayStack(object):
     def __init__(self):
         self.lst = [None]
