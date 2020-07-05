@@ -190,3 +190,18 @@ def heapsort(lst):
         exch(lst, 0, N)
         N -= 1
         sink(lst, 0, N)
+
+
+# P346
+def kth_min(lst, k):
+    random.shuffle(lst)
+    lo, hi = 0, len(lst) - 1
+    while hi > lo:
+        j = partition(lst, lo, hi)
+        if j == k:
+            return lst[k]
+        elif j > k:
+            hi = j - 1
+        else:
+            lo = j + 1
+    return lst[k]

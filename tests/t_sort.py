@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-from nose.tools import assert_equal, assert_true, raises
+from nose.tools import assert_equal, assert_true
 import random
-from sort import selection, insertion, shell, merge, mergeBU, quick, quick3way, heapsort
+from sort import selection, insertion, shell, merge, mergeBU, quick, quick3way, heapsort, kth_min
 
 
 def test_all():
@@ -38,3 +38,10 @@ def _assert_order(lst):
     for i in range(len(lst) - 1):
         assert_true(
             lst[i] <= lst[i + 1]), '%s: %s, %s' % (i, lst[i], lst[i + 1])
+
+
+def test_kth_min():
+    lst = list(range(100))
+    random.shuffle(lst)
+    k = 35
+    assert_equal(k, kth_min(lst, k))
