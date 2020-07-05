@@ -1,17 +1,6 @@
 #!/usr/bin/env python
 # P 129, Dijkstra's double stack algrithm for arithmetic expression
-
-
-class Stack(object):
-
-    def __init__(self):
-        self.lst = []
-
-    def push(self, v):
-        self.lst.append(v)
-
-    def pop(self):
-        return self.lst.pop()
+from utils import Stack
 
 
 def evaluate(express):
