@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import random
 
 
 # exchange i, j in list
@@ -17,6 +18,7 @@ def selection(lst):
 
 
 # P249, O(N^2), suitable for small list or partial order list
+
 
 def _insertion(lst, lo, hi):
     for i in range(lo + 1, hi + 1):
@@ -100,12 +102,12 @@ def mergeBU(lst):
 # P291
 def partition(lst, lo, hi):
     i, j = lo, hi + 1
-    v = lst[lo]     # comparable value
+    v = lst[lo]  # comparable value
     while True:
         i += 1
+        j -= 1
         while lst[i] < v and i < hi:
             i += 1
-        j -= 1
         while v < lst[j] and j > lo:
             j -= 1
         if i >= j:
@@ -117,17 +119,50 @@ def partition(lst, lo, hi):
 
 # P288
 def quick(lst):
-    import random
     M = 10
 
     def _sort(lst, lo, hi):
         # if hi <= lo: return
-        if hi <= lo + M:    # inprovement, P295
+        if hi <= lo + M:  # inprovement, P295
             _insertion(lst, lo, hi)
             return
         j = partition(lst, lo, hi)
         _sort(lst, lo, j - 1)
         _sort(lst, j + 1, hi)
+
+    random.shuffle(lst)
+    _sort(lst, 0, len(lst) - 1)
+
+
+def compare(x, y):
+    res = 0
+    if x < y:
+        res = -1
+    elif x > y:
+        res = 1
+    return res
+
+
+# P298, suitable for mass repeated values
+def quick3way(lst):
+    def _sort(lst, lo, hi):
+        if hi <= lo:
+            return
+        lt, i, gt = lo, lo + 1, hi
+        v = lst[lo]
+        while i <= gt:
+            cmp = compare(lst[i], v)
+            if cmp < 0:
+                exch(lst, lt, i)
+                lt += 1
+                i += 1
+            elif cmp > 0:
+                exch(lst, i, gt)
+                gt -= 1
+            else:
+                i += 1
+        _sort(lst, lo, lt - 1)
+        _sort(lst, gt + 1, hi)
 
     random.shuffle(lst)
     _sort(lst, 0, len(lst) - 1)

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from nose.tools import assert_equal, assert_true, raises
 import random
-from sort import selection, insertion, shell, merge, mergeBU, quick
+from sort import selection, insertion, shell, merge, mergeBU, quick, quick3way
 
 
 def test_all():
@@ -11,6 +11,7 @@ def test_all():
     _t(merge)
     _t(mergeBU)
     _t(quick)
+    _t(quick3way)
 
 
 def _t(sort_fn):
