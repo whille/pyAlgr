@@ -1,15 +1,16 @@
 #!/usr/bin/env python
 from nose.tools import assert_equal, assert_true, raises
 import random
-from sort import selection, insertion, shell, merge, mergeBU
+from sort import selection, insertion, shell, merge, mergeBU, quick
 
 
 def test_all():
-    _t(selection)
-    _t(insertion)
-    _t(shell)
+    # _t(selection)
+    # _t(insertion)
+    # _t(shell)
     _t(merge)
     _t(mergeBU)
+    _t(quick)
 
 
 def _t(sort_fn):
@@ -22,7 +23,7 @@ def _t(sort_fn):
     lst = []
     sort_fn(lst)
     assert_equal(lst, [])
-    lst = list(range(100))
+    lst = list(range(10000))
     random.shuffle(lst)
     sort_fn(lst)
     _assert_order(lst)

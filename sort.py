@@ -17,13 +17,18 @@ def selection(lst):
 
 
 # P249, O(N^2), suitable for small list or partial order list
-def insertion(lst):
-    for i in range(1, len(lst)):
-        for j in range(i, 0, -1):  # backwards
+
+def _insertion(lst, lo, hi):
+    for i in range(lo + 1, hi + 1):
+        for j in range(i, lo, -1):  # backwards
             if lst[j] < lst[j - 1]:
                 exch(lst, j, j - 1)
             else:
                 break
+
+
+def insertion(lst):
+    _insertion(lst, 0, len(lst) - 1)
 
 
 # P258, based on insertion, but increase switch step h, so called h-step order.
@@ -65,6 +70,7 @@ def _merge(aux, lst, lo, mid, hi):
             i += 1
 
 
+# P271, O(Nlg(N))
 def merge(lst):
     aux = [0] * len(lst)
 
@@ -80,7 +86,7 @@ def merge(lst):
     _sort(lst, 0, len(lst) - 1)
 
 
-# bottom up merge # 278
+# P278, bottom up merge
 def mergeBU(lst):
     N = len(lst)
     aux = [0] * N
@@ -89,3 +95,39 @@ def mergeBU(lst):
         for lo in range(0, N - sz, sz * 2):
             _merge(aux, lst, lo, lo + sz - 1, min(lo + 2 * sz - 1, N - 1))
         sz *= 2
+
+
+# P291
+def partition(lst, lo, hi):
+    i, j = lo, hi + 1
+    v = lst[lo]     # comparable value
+    while True:
+        i += 1
+        while lst[i] < v and i < hi:
+            i += 1
+        j -= 1
+        while v < lst[j] and j > lo:
+            j -= 1
+        if i >= j:
+            break
+        exch(lst, i, j)
+    exch(lst, lo, j)
+    return j
+
+
+# P288
+def quick(lst):
+    import random
+    M = 10
+
+    def _sort(lst, lo, hi):
+        # if hi <= lo: return
+        if hi <= lo + M:    # inprovement, P295
+            _insertion(lst, lo, hi)
+            return
+        j = partition(lst, lo, hi)
+        _sort(lst, lo, j - 1)
+        _sort(lst, j + 1, hi)
+
+    random.shuffle(lst)
+    _sort(lst, 0, len(lst) - 1)
