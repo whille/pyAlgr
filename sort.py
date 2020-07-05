@@ -145,6 +145,7 @@ def compare(x, y):
 
 # P298, suitable for mass repeated values
 def quick3way(lst):
+
     def _sort(lst, lo, hi):
         if hi <= lo:
             return
@@ -166,3 +167,26 @@ def quick3way(lst):
 
     random.shuffle(lst)
     _sort(lst, 0, len(lst) - 1)
+
+
+# max top
+def sink(lst, k, N):
+    while 2 * (k + 1) <= N + 1:
+        j = 2 * k + 1
+        if j < N and lst[j] < lst[j + 1]:
+            j += 1
+        if lst[k] >= lst[j]:
+            break
+        exch(lst, k, j)
+        k = j
+
+
+# P323
+def heapsort(lst):
+    N = len(lst) - 1
+    for k in range((N + 1) // 2 - 1, -1, -1):
+        sink(lst, k, N)
+    while N > 0:
+        exch(lst, 0, N)
+        N -= 1
+        sink(lst, 0, N)
