@@ -175,10 +175,10 @@ class BST:
         return x
 
     # P411
-    def keys(self):
+    def __iter__(self):
         queue = Queue()
         self._keys(self.root, queue, self.min(), self.max())
-        return list(queue)
+        return queue.__iter__()
 
     def _keys(self, x, queue, lo, hi):
         if x is None:
@@ -189,20 +189,6 @@ class BST:
             queue.enqueue(x.key)
         if x.key < hi:
             self._keys(x.right, queue, lo, hi)
-
-    def level_order(self):
-        """Return the keys in the BST in level order"""
-        keys = Queue()
-        queue = Queue()
-        queue.enqueue(self.root)
-        while not queue.isEmpty():
-            x = queue.dequeue()
-            if x is None:
-                continue
-            keys.enqueue(x.key)
-            queue.enqueue(x.left)
-            queue.enqueue(x.right)
-        return keys
 
     def contains(self, key):
         return self.get(key) is not None

@@ -13,7 +13,7 @@ def _test_bst(st):
     for i, key in enumerate(list(line)):
         dic_check[key] = i
         st.put(key, i)
-    keys = st.keys()
+    keys = list(st)
     for i in range(len(keys) - 1):
         assert_true(keys[i] <= keys[i + 1])
         assert_true(st.rank(keys[i]) <= st.rank(keys[i + 1]))
