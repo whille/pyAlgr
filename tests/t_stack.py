@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from nose.tools import assert_equal, assert_true, raises
+from nose.tools import assert_equal, assert_true
 from utils import ResizingArrayStack
 
 
