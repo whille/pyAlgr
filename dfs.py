@@ -15,7 +15,7 @@
   NOT connected
 
  """
-from graph import Graph
+from graph import graph_from_file
 
 
 class DepthFirstSearch:
@@ -36,12 +36,7 @@ if __name__ == '__main__':
     import sys
     f = open(sys.argv[1])
     s = int(sys.argv[2])
-    V = int(f.readline())
-    E = int(f.readline())
-    g = Graph(V)
-    for i in range(E):
-        v, w = f.readline().split()
-        g.add_edge(v, w)
+    g = graph_from_file(f)
     search = DepthFirstSearch(g, s)
     for v in range(g.V):
         if search.marked[v]:

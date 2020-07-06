@@ -13,6 +13,10 @@ class Stack(object):
     def pop(self):
         return self.lst.pop()
 
+    def __iter__(self):
+        while self.lst:
+            yield self.pop()
+
 
 # P140
 class ResizingArrayStack(object):

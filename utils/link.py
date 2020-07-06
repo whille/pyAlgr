@@ -12,7 +12,7 @@ class Container(object):
         self.first = None
         self.N = 0
 
-    def isEmpty(self):
+    def is_empty(self):
         return self.first is None
 
     def size(self):
@@ -54,15 +54,12 @@ class Queue(Container):
         self.last = None
         self.N = 0
 
-    def isEmpty(self):
-        return self.first is None
-
     def size(self):
         return self.N
 
     def enqueue(self, v):
         n = Node(v)
-        if self.isEmpty():
+        if self.is_empty():
             self.first = n
         else:
             self.last.next = n
@@ -72,7 +69,7 @@ class Queue(Container):
     def dequeue(self):
         v = self.first.v
         self.first = self.first.next
-        if self.isEmpty():
+        if self.is_empty():
             self.last = None
         self.N -= 1
         return v

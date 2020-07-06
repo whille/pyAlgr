@@ -15,7 +15,6 @@ from utils import Bag
 
 
 class Graph:
-
     def __init__(self, v):
         self.V = v
         self.E = 0
@@ -53,13 +52,18 @@ class Graph:
         return count
 
 
-if __name__ == '__main__':
-    import sys
-
-    V = int(sys.stdin.readline())
-    E = int(sys.stdin.readline())
+def graph_from_file(f):
+    V = int(f.readline())
+    E = int(f.readline())
     g = Graph(V)
     for i in range(E):
-        v, w = sys.stdin.readline().split()
+        v, w = f.readline().split()
         g.add_edge(v, w)
+    return g
+
+
+if __name__ == '__main__':
+    import sys
+    f = open(sys.argv[1])
+    g = graph_from_file(f)
     print(g)
