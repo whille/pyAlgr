@@ -8,7 +8,7 @@ class Node:
         self.v = v
         self.left = None
         self.right = None
-        self.N = N      # nodes number of all subtree
+        self.N = N      # nodes number of its' subtree
 
 
 # binary search tree
@@ -142,13 +142,13 @@ class BST:
             return self._size(x.left)
 
     # P411
-    def deleteMin(self):
-        self.root = self._deleteMin(self.root)
+    def delete_min(self):
+        self.root = self._delete_min(self.root)
 
-    def _deleteMin(self, x):
+    def _delete_min(self, x):
         if x.left is None:
             return x.right
-        x.left = self._deleteMin(x.left)
+        x.left = self._delete_min(x.left)
         x.N = self._size(x.left) + self._size(x.right) + 1
         return x
 
@@ -170,7 +170,7 @@ class BST:
             t = x
             x = self._min(x.right)
             x.left = t.left
-            x.right = self._deleteMin(t.right)
+            x.right = self._delete_min(t.right)
         x.N = self._size(x.left) + self._size(x.right) + 1
         return x
 
@@ -203,3 +203,17 @@ class BST:
             queue.enqueue(x.left)
             queue.enqueue(x.right)
         return keys
+
+    def contains(self, key):
+        return self.get(key) is not None
+
+    def height(self):
+        return self._height(self.root)
+
+    def _height(self, x):
+        if x is None:
+            return -1
+        return 1 + max(self._height(x.left), self._height(x.right))
+
+    def is_empty(self):
+        return self.root is None

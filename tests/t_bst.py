@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 from nose.tools import assert_equal, assert_true
 from bst import BST
+from rb_bst import RedBlackBST
 
 
 def test_bst():
     st = BST()
+    st = RedBlackBST()
     i = 0
     # https://algs4.cs.princeton.edu/32bst/tinyST.txt
     line = 'SEARCHEXAMPLE'
@@ -23,3 +25,6 @@ def test_bst():
         assert_equal(v, dic_check[key])
         assert_equal(k, key)
         print('key: %s: v: %s, rank: %s , select: %s' % (key, v, i, k))
+    st.delete_min()
+    assert_equal(keys[1], st.min())
+    st.delete('M')
