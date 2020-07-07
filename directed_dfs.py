@@ -61,14 +61,19 @@ class DirectedCycle:
                 self.edge_to[w] = v
                 self.dfs(G, w)
             elif self.on_stack[w]:
-                self.cycle = Stack()
-                x = v
-                while x != w:
-                    self.cycle.push(x)
-                    x = self.edge_to[x]
-                self.cycle.push(w)
-                self.cycle.push(v)
+                self.cycle = self.trace_cycle(v, w)
+                return
         self.on_stack[v] = False
+
+    def trace_cycle(self, v, w):
+        stack = Stack()
+        x = v
+        while x != w:
+            stack.push(x)
+            x = self.edge_to[x]
+        stack.push(w)
+        stack.push(v)
+        return stack
 
     def marked(self, v):
         return self.marked[v]
