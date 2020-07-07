@@ -52,10 +52,10 @@ class Graph:
         return count
 
 
-def graph_from_file(f):
+def graph_from_file(f, cls=Graph):
     V = int(f.readline())
     E = int(f.readline())
-    g = Graph(V)
+    g = cls(V)
     for i in range(E):
         v, w = f.readline().split()
         g.add_edge(v, w)

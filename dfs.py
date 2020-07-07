@@ -20,7 +20,7 @@ from graph import graph_from_file
 
 class DepthFirstSearch:
     def __init__(self, G, src):
-        self.marked = [False for _ in range(G.V)]
+        self.marked = [False] * G.V
         self.count = 0
         self.dfs(G, src)
 
@@ -31,12 +31,15 @@ class DepthFirstSearch:
             if not self.marked[w]:
                 self.dfs(G, w)
 
+    def connections(self):
+        return filter(lambda v: self.marked[v], range(g.V))
+
 
 # P544, connection components
 class CC:
     def __init__(self, G):
-        self.marked = [False for _ in range(G.V)]
-        self.id = [0 for _ in range(G.V)]
+        self.marked = [False] * G.V
+        self.id = [0] * G.V
         self.count = 0      # cc count
         for s in range(G.V):
             if not self.marked[s]:
@@ -57,7 +60,7 @@ class CC:
 # P547, O(E+V)
 class Cycle:
     def __init__(self, G):
-        self.marked = [False for _ in range(G.V)]
+        self.marked = [False] * G.V
         self.has_cycle = False
         for s in range(G.V):
             if not self.marked[s]:
@@ -115,18 +118,15 @@ def show_2color(g):
 
 def show_connected(g, s):
     search = DepthFirstSearch(g, s)
-    for v in range(g.V):
-        if search.marked[v]:
-            print(v),
-    print
+    print ' '.join([str(v) for v in search.connections()])
     if search.count == g.V:
         print("connected")
     else:
         print("not connected")
 
 
-def show_cc(g):
-    cc = CC(g)
+def show_cc(g, cls=CC):
+    cc = cls(g)
     print(cc.count, " components")
     components = [[] for i in range(cc.count)]
     for v in range(g.V):

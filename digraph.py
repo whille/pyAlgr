@@ -8,45 +8,12 @@
    A graph, implemented using an array of sets.
    Parallel edges and self-loops are permitted.
 
-   % python digraph.py < tinyDG.txt
-   13 vertices, 22 edges
-   0: 5 1
-   1:
-   2: 0 3
-   3: 5 2
-   4: 3 2
-   5: 4
-   6: 9 4 8 0
-   7: 6 9
-   8: 6
-   9: 11 10
-   10: 12
-   11: 4 12
-   12: 9
-
+   % python digraph.py tinyDG.txt
  """
-from graph import Graph, Bag
+from graph import Graph, graph_from_file
 
 
 class Digraph(Graph):
-    def __init__(self, v=0, **kwargs):
-        self.V = v
-        self.E = 0
-        self.adj = {}
-        for v in range(self.V):
-            self.adj[v] = Bag()
-
-        if 'file' in kwargs:
-            # init a digraph by a file input
-            in_file = kwargs['file']
-            self.V = int(in_file.readline())
-            for v in range(self.V):
-                self.adj[v] = Bag()
-            E = int(in_file.readline())
-            for i in range(E):
-                v, w = in_file.readline().split()
-                self.add_edge(int(v), int(w))
-
     def add_edge(self, v, w):
         v, w = int(v), int(w)
         self.adj[v].add(w)
@@ -62,10 +29,6 @@ class Digraph(Graph):
 
 if __name__ == '__main__':
     import sys
-    V = int(sys.stdin.readline())
-    E = int(sys.stdin.readline())
-    g = Digraph(V)
-    for i in range(E):
-        v, w = sys.stdin.readline().split()
-        g.add_edge(v, w)
+    f = open(sys.argv[1])
+    g = graph_from_file(f, Digraph)
     print(g)
