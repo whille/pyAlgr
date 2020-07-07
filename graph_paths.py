@@ -27,7 +27,7 @@ class GraphPaths:
         self.marked = [False for _ in range(G.V)]
         self.edge_to = [0 for _ in range(G.V)]
         self.s = src
-        self.build_path(self, G, s)
+        self.build_path(G, s)
 
     def build_path(self, G, v):
         raise 'implement in subclass'
@@ -48,33 +48,25 @@ class GraphPaths:
 
 
 class DepthFirstPaths(GraphPaths):
-    def __init__(self, G, s):
-        super(DepthFirstPaths, self).__init__(G, s)
-        self.dfs(G, s)
-
-    def dfs(self, G, v):
+    def build_path(self, G, v):
         self.marked[v] = True
         for w in G.adj[v]:
             if not self.marked[w]:
                 self.edge_to[w] = v
-                self.dfs(G, w)
+                self.build_path(G, w)
 
 
 class BreadthFirstPaths(GraphPaths):
-    def __init__(self, G, s):
-        super(BreadthFirstPaths, self).__init__(G, s)
-        self.bfs(G, s)
-
-    def bfs(self, G, s):
-        self._marked[s] = True
+    def build_path(self, G, s):
+        self.marked[s] = True
         queue = Queue()
         queue.enqueue(s)
         while not queue.is_empty():
             v = queue.dequeue()
             for w in G.adj[v]:
-                if not self._marked[w]:
+                if not self.marked[w]:
                     self.edge_to[w] = v
-                    self._marked[w] = True
+                    self.marked[w] = True
                     queue.enqueue(w)
 
 
