@@ -12,6 +12,19 @@
          DFW
       EWR
          Not in database.
+     % python degrees_of_separation.py movies.txt "/" "Animal House (1978)"
+      Titanic (1997)
+         Animal House (1978)
+         Allen, Karen (I)
+         Raiders of the Lost Ark (1981)
+         Taylor, Rocky (I)
+         Titanic(1997)
+      To Catch a Thief (1955)
+         Animal House (1978)
+         Vernon, John (I)
+         Topaz (1969)
+         Hitchcock, Alfred (I)
+         To Catch a Thief (1955)
 """
 
 
