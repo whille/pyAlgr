@@ -1,16 +1,16 @@
 """
-  Execution:    python depth_first_search.py filename.txt s
+  Execution:    python dfs.py filename.txt s
   Data files:   https: // algs4.cs.princeton.edu / 41graph / tinyG.txt
                 https: // algs4.cs.princeton.edu / 41graph / mediumG.txt
 
   Run depth first search on an undirected graph.
   Runs in O(E + V) time.
 
- % python depth_first_search.py tinyG.txt 0
+ % python dfs.py tinyG.txt 0
   0 1 2 3 4 5 6
   NOT connected
 
- % python depth_first_search.py tinyG.txt 9
+ % python dfs.py tinyG.txt 9
   9 10 11 12
   NOT connected
 
@@ -97,7 +97,7 @@ class TwoColor:
                 return
 
 
-def test_cycle(g):
+def show_cycle(g):
     cycle = Cycle(g)
     judge = ''
     if not cycle.has_cycle:
@@ -105,7 +105,7 @@ def test_cycle(g):
     print("Graph is%s cycle" % judge)
 
 
-def test_2color(g):
+def show_2color(g):
     cycle = TwoColor(g)
     judge = ''
     if not cycle.is2colorable:
@@ -113,7 +113,7 @@ def test_2color(g):
     print("Graph is%s 2 colorable" % judge)
 
 
-def test_connected(g, s):
+def show_connected(g, s):
     search = DepthFirstSearch(g, s)
     for v in range(g.V):
         if search.marked[v]:
@@ -125,7 +125,7 @@ def test_connected(g, s):
         print("not connected")
 
 
-def test_cc(g):
+def show_cc(g):
     cc = CC(g)
     print(cc.count, " components")
     components = [[] for i in range(cc.count)]
@@ -140,7 +140,7 @@ if __name__ == '__main__':
     f = open(sys.argv[1])
     s = int(sys.argv[2])
     g = graph_from_file(f)
-    test_connected(g, s)
-    test_cc(g)
-    test_cycle(g)
-    test_2color(g)
+    show_connected(g, s)
+    show_cc(g)
+    show_cycle(g)
+    show_2color(g)

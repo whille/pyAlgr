@@ -27,7 +27,7 @@ class GraphPaths:
         self.marked = [False for _ in range(G.V)]
         self.edge_to = [0 for _ in range(G.V)]
         self.s = src
-        self.build_path(G, s)
+        self.build_path(G, src)
 
     def build_path(self, G, v):
         raise 'implement in subclass'
@@ -43,7 +43,7 @@ class GraphPaths:
         while x != self.s:
             path.push(x)
             x = self.edge_to[x]
-        path.push(s)
+        path.push(self.s)
         return path
 
 
