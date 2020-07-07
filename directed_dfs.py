@@ -41,6 +41,7 @@ class DirectedDFS:
         return filter(lambda v: self.marked[v], range(g.V))
 
 
+# P575
 class DirectedCycle:
     def __init__(self, G):
         self.marked = [False] * G.V

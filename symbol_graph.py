@@ -44,7 +44,7 @@ from graph import Graph
 
 # P552, use Graph, ST and keys to build SymbolGraph
 class SymbolGraph:
-    def __init__(self, stream, sp):
+    def __init__(self, stream, sp, cls_g=Graph):
         self.st = ST()      # {key: i}
         for line in open(stream):
             for key in line.strip().split(sp):
@@ -53,7 +53,7 @@ class SymbolGraph:
         self.keys = [""] * self.st.size()       # reverse index, {i: key}
         for key in self.st:
             self.keys[self.st.get(key)] = key
-        self.G = Graph(self.st.size())      # use int i as vertex
+        self.G = cls_g(self.st.size())      # use int i as vertex
         for line in open(stream):
             a = line.strip().split(sp)
             v = self.st.get(a[0])
