@@ -5,32 +5,32 @@
 class IndexMinPQ:
     def __init__(self, maxN):
         self.n = 0
-        self.keys = [None] * (maxN + 1)   # heap representation of the priority queue (pq)
+        self.vs = [None] * (maxN + 1)     # heap representation of the priority queue (pq)
         self.pq = [0] * (maxN + 1)        # {n: index}
         self.qp = [-1] * (maxN + 1)       # reverse of self.pq: qp[pq[i]] == i
 
-    def insert(self, i, key):
-        """key belong to index i"""
+    def insert(self, i, v):
+        """v belong to index i"""
         self.n += 1
         self.pq[self.n] = i
         self.qp[i] = self.n
-        self.keys[i] = key
+        self.vs[i] = v
         self.swim(self.n)
 
     def min_index(self):
         self._check_empty()
         return self.pq[1]
 
-    def min_key(self):
+    def min_v(self):
         self._check_empty()
-        return self.keys[self.pq[1]]
+        return self.vs[self.pq[1]]
 
     def _check_empty(self):
         if self.n == 0:
             raise Exception('priority queue underflow')
 
-    def change(self, i, key):
-        self.keys[i] = key
+    def change(self, i, v):
+        self.vs[i] = v
         self.sink(self.qp[i])
         self.swim(self.qp[i])
 
@@ -46,28 +46,28 @@ class IndexMinPQ:
         self.n -= 1
         self.swim(index)
         self.sink(index)
-        self.keys[i] = None
+        self.vs[i] = None
         self.qp[i] = -1
 
-    def decrease_key(self, i, key):
-        if self.keys[i] <= key:
-            raise Exception("calling decrease key with invalid value")
-        self.keys[i] = key
+    def decrease_v(self, i, v):
+        if self.vs[i] <= v:
+            raise Exception("calling decrease v with invalid value")
+        self.vs[i] = v
         self.swim(self.qp[i])
 
     def greater(self, i, j):
-        return self.keys[self.pq[i]] > self.keys[self.pq[j]]
+        return self.vs[self.pq[i]] > self.vs[self.pq[j]]
 
-    def delMin(self):
+    def del_min(self):
         index_min = self.pq[1]
         self.pq[1], self.pq[self.n] = self.pq[self.n], self.pq[1]
         self.n -= 1
         self.sink(1)
-        self.keys[self.pq[self.n + 1]] = None
+        self.vs[self.pq[self.n + 1]] = None
         self.qp[self.pq[self.n + 1]] = -1
         return index_min
 
-    def isEmpty(self, ):
+    def is_empty(self, ):
         return self.n == 0
 
     def size(self, ):
@@ -97,19 +97,19 @@ def test():
     pq = IndexMinPQ(len(strings))
     for i, s in enumerate(strings):
         pq.insert(i, s)
-    # delete and print each key
-    while not pq.isEmpty():
-        i = pq.delMin()
+    # delete and print each v
+    while not pq.is_empty():
+        i = pq.del_min()
         print i, strings[i],
     print
     # reinsert the same strings
     for i, s in enumerate(strings):
         pq.insert(i, s)
-    # print each key using the iterator
+    # print each v using the iterator
     for i in pq:
         print i, strings[i]
-    while not pq.isEmpty():
-        i = pq.delMin()
+    while not pq.is_empty():
+        i = pq.del_min()
 
 
 if __name__ == "__main__":
