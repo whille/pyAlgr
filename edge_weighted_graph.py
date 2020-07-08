@@ -24,7 +24,7 @@ from weighted_edge import Edge, DirectedEdge
 
 
 class EdgeWeightedGraph(object):
-    def __init__(self, V, f):
+    def __init__(self, V):
         self.V = V
         self.adj = {}
         for v in range(self.V):
@@ -60,8 +60,8 @@ class EdgeWeightedGraph(object):
 
 
 class EdgeWeightedDigraph(EdgeWeightedGraph):
-    def __init__(self, V, f):
-        super(EdgeWeightedDigraph, self).__init__(V, f)
+    def __init__(self, V):
+        super(EdgeWeightedDigraph, self).__init__(V)
         self.edge_cls = DirectedEdge
 
     def add_edge(self, e):
@@ -72,7 +72,7 @@ class EdgeWeightedDigraph(EdgeWeightedGraph):
 def graph_from_file(f, cls):
     V = int(f.readline())
     E = int(f.readline())
-    g = cls(V, f)
+    g = cls(V)
     g.init_edge(f, E)
     return g
 

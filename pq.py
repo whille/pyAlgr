@@ -1,9 +1,9 @@
 #!/usr/bin/env python
+# python lib: https://docs.python.org/3/library/heapq.html
 
 
 # P318
 class MaxPQ:
-
     def __init__(self, N):
         self.pq = [None] * N
         self.N = 0
@@ -60,18 +60,3 @@ def topM(lst, M):
             pq.delMax()
     while not pq.isEmpty():
         yield pq.delMax()
-
-
-def multiway(streams):
-    N = len(streams)
-    pq = IndexMinPQ(N)
-    for i in range(N):
-        if not streams[i].isEmpty():
-            pq.insert(i, streams[i].readString())
-    while not pq.isEmpty():
-        yield pq.min()
-        i = pq.delMin()
-        if not streams[i].isEmpty():
-            pq.insert(i, streams[i].readString())
-
-
