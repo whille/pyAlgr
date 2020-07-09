@@ -31,9 +31,10 @@ from edge_weighted_graph import EdgeWeightedDigraph, graph_from_file
 from index_min_pq import IndexMinPQ
 from utils import Stack
 
-POSITIVE_INFINITY = 999999.0
+POSITIVE_INFINITY = float("inf")
 
 
+# P652 <=O(ElogV)
 class DijkstraSP:
     def __init__(self, g, s):
         self.edgeTo = [None for _ in range(g.V)]

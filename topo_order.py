@@ -32,11 +32,11 @@ def topological_order(sg):
     graph = sg.graph()
     finder = DirectedCycle(graph)
     if finder.has_cycle():
-        print 'has_cycle'
+        yield 'has_cycle'
         return
     dfs = DepthFirstOrder(graph)
     for v in dfs.reverse_post:
-        print(sg.name(v))
+        yield (sg.name(v))
 
 
 if __name__ == '__main__':
@@ -44,4 +44,4 @@ if __name__ == '__main__':
     filename, delimiter = sys.argv[1], sys.argv[2]
     f = open(filename)
     sg = SymbolGraph(filename, delimiter, Digraph)
-    topological_order(sg)
+    print '\n'.join(topological_order(sg))
