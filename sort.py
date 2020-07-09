@@ -18,8 +18,6 @@ def selection(lst):
 
 
 # P249, O(N^2), suitable for small list or partial order list
-
-
 def _insertion(lst, lo, hi):
     for i in range(lo + 1, hi + 1):
         for j in range(i, lo, -1):  # backwards
@@ -51,8 +49,6 @@ def shell(lst):
 
 
 # P271
-
-
 def _merge(aux, lst, lo, mid, hi):
     i, j = lo, mid + 1
     for k in range(lo, hi + 1):

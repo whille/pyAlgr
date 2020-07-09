@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 
+
 from IndexedMinPQ import IndexedMinPQ
-# from index_min_pq import IndexedMinPQ
 
 
-# suitable for multi stream/large outside data
+# suitable for multi stream/distributed sort, each stream has already been sorted
 # python lib function: heapq.merge
 def multiway(streams):
     N = len(streams)
