@@ -31,6 +31,9 @@ class IndexedMinPQ:
             i = parent_i
             parent_i = i // 2
 
+    def minIndex(self):
+        return self.pq[1]
+
     def deleteMin(self):
         if not self.isEmpty():
             out = self.key[self.pq[1]]

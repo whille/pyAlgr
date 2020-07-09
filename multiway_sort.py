@@ -1,17 +1,19 @@
 #!/usr/bin/env python
 
-from index_min_pq import IndexMinPQ
+from IndexedMinPQ import IndexedMinPQ
+# from index_min_pq import IndexedMinPQ
 
 
+# suitable for multi stream/large outside data
 # python lib function: heapq.merge
 def multiway(streams):
     N = len(streams)
-    pq = IndexMinPQ(N)
+    pq = IndexedMinPQ(N)
     for i in range(N):
         if not streams[i].isEmpty():
             pq.insert(i, streams[i].readString())
     while not pq.isEmpty():
-        yield pq.min()
-        i = pq.delMin()
+        i = pq.minIndex()
+        yield pq.deleteMin()
         if not streams[i].isEmpty():
             pq.insert(i, streams[i].readString())

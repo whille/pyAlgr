@@ -2,7 +2,7 @@
 # ref: https://medium.com/@me.khoshpasand/indexed-priority-queue-explained-with-the-python-implementation-5f55edd7cdf0
 
 
-class IndexMinPQ:
+class IndexedMinPQ:
     def __init__(self, maxN):
         self.n = 0
         self.vs = [None] * (maxN + 1)     # heap representation of the priority queue (pq)
@@ -17,7 +17,7 @@ class IndexMinPQ:
         self.vs[i] = v
         self.swim(self.n)
 
-    def min_index(self):
+    def minIndex(self):
         self._check_empty()
         return self.pq[1]
 
@@ -58,16 +58,16 @@ class IndexMinPQ:
     def greater(self, i, j):
         return self.vs[self.pq[i]] > self.vs[self.pq[j]]
 
-    def del_min(self):
-        index_min = self.pq[1]
+    def deleteMin(self):
+        v = self.vs[self.pq[1]]
         self.pq[1], self.pq[self.n] = self.pq[self.n], self.pq[1]
         self.n -= 1
         self.sink(1)
         self.vs[self.pq[self.n + 1]] = None
         self.qp[self.pq[self.n + 1]] = -1
-        return index_min
+        return v
 
-    def is_empty(self, ):
+    def isEmpty(self, ):
         return self.n == 0
 
     def size(self, ):
@@ -90,27 +90,3 @@ class IndexMinPQ:
                 break
             self.pq[i], self.pq[j] = self.pq[j], self.pq[i]
             i = j
-
-
-def test():
-    strings = ("it", "was", "the", "best", "of", "times", "it", "was", "the", "worst")
-    pq = IndexMinPQ(len(strings))
-    for i, s in enumerate(strings):
-        pq.insert(i, s)
-    # delete and print each v
-    while not pq.is_empty():
-        i = pq.del_min()
-        print i, strings[i],
-    print
-    # reinsert the same strings
-    for i, s in enumerate(strings):
-        pq.insert(i, s)
-    # print each v using the iterator
-    for i in pq:
-        print i, strings[i]
-    while not pq.is_empty():
-        i = pq.del_min()
-
-
-if __name__ == "__main__":
-    test()
