@@ -8,7 +8,7 @@ class Stream:
         self.lst = range(start, end)
 
     def readString(self):
-        return self.lst.pop()
+        return self.lst.pop(0)
 
     def isEmpty(self):
         return not self.lst
@@ -16,6 +16,8 @@ class Stream:
 
 def test_sort():
     streams = Stream(0, 6), Stream(2, 10), Stream(3, 11)
+    last = -1
     for v in multiway(streams):
-        print v
-    assert_equal([1, 2, 3, 4], 'a')
+        # print v,
+        assert_true(last <= v)
+        last = v
