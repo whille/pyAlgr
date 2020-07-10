@@ -12,8 +12,9 @@ class AcyclicSP:
         for v in range(g.V):
             self.distTo[v] = POSITIVE_INFINITY
         self.distTo[s] = 0.0
-        for e in topological_order(g):
-            self.relax(e)
+        for v in topological_order(g):
+            for e in g.adj[v]:
+                self.relax(e)
 
     def relax(self, e):
         v, w = e.From(), e.To()
