@@ -5,7 +5,7 @@
                   https://algs4.cs.princeton.edu/42digraph/largeDG.txt
 
     Determine single-source or multiple-source reachability in a digraph
-    using depth first search.
+    using depth first search(DFS).
     Runs in O(E + V) time.
 
     % python directed_dfs.py tinyDG.txt 1
@@ -76,8 +76,8 @@ class DirectedCycle:
         stack.push(v)
         return stack
 
-    def marked(self, v):
-        return self.marked[v]
+    # def marked(self, v):
+        # return self.marked[v]
 
     def has_cycle(self):
         return self.cycle is not None

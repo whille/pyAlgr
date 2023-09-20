@@ -29,7 +29,7 @@ class Container(object):
 class Bag(Container):
     def add(self, v):
         oldfirst = self.first
-        self.first = Node(v, oldfirst)
+        self.first = Node(v, Next=oldfirst)
         self.N += 1
 
 

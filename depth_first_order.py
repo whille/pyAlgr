@@ -37,7 +37,7 @@ def show_orders():
     names = 'pre,post,reverse_post'.split(',')
     orders = (dfo.pre, dfo.post, dfo.reverse_post)
     for name, order in zip(names, orders):
-        print '%s: %s' % (name, ' '.join([str(v) for v in order]))
+        print('%s: %s' % (name, ' '.join([str(v) for v in order])))
 
 
 if __name__ == '__main__':

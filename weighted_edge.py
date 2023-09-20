@@ -38,4 +38,3 @@ class DirectedEdge(BaseEdge):
 
     def __str__(self):
         return "%d->%s %.2f" % (self.v, self.w, self.weight)
-

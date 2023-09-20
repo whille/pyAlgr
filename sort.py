@@ -19,6 +19,7 @@ def selection(lst):
 
 # P249, O(N^2), suitable for small list or partial order list
 def _insertion(lst, lo, hi):
+    # insert lst[i] forward
     for i in range(lo + 1, hi + 1):
         for j in range(i, lo, -1):  # backwards
             if lst[j] < lst[j - 1]:
@@ -165,7 +166,7 @@ def quick3way(lst):
     _sort(lst, 0, len(lst) - 1)
 
 
-# max top
+# P315, sink max down to bottom
 def sink(lst, k, N):
     while 2 * (k + 1) <= N + 1:
         j = 2 * k + 1

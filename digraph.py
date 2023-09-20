@@ -5,7 +5,7 @@
                  https://algs4.cs.princeton.edu/41graph/mediumDG.txt
                  https://algs4.cs.princeton.edu/41graph/largeDG.txt
 
-   A graph, implemented using an array of sets.
+   A directed graph, implemented using an array of sets.
    Parallel edges and self-loops are permitted.
 
    % python digraph.py tinyDG.txt
